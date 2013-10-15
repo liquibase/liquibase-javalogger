@@ -3,7 +3,7 @@
     <groupId>org.liquibase.ext</groupId>
     <artifactId>liquibase-javalogger</artifactId>
     <name>Liquibase java.util.Logger Extension</name>
-    <version>3.0</version>
+    <version>3.1-SNAPSHOT</version>
     <description>Liquibase extension to log via java.util.Logger</description>
 
     <url>http://www.liquibase.org</url>
