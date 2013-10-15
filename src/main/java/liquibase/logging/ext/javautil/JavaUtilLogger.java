@@ -1,18 +1,46 @@
 package liquibase.logging.ext.javautil;
 
+import liquibase.changelog.ChangeSet;
+import liquibase.changelog.DatabaseChangeLog;
 import liquibase.exception.UnexpectedLiquibaseException;
 import liquibase.logging.core.AbstractLogger;
 import liquibase.logging.LogLevel;
+import liquibase.util.StringUtils;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.logging.*;
 
 public class JavaUtilLogger extends AbstractLogger {
 
     private java.util.logging.Logger logger;
 
+    private String changeLogName = null;
+    private String changeSetName = null;
+
     public int getPriority() {
-        return 5;
+        return PRIORITY_DATABASE;
+    }
+
+    @Override
+    public void setChangeLog(DatabaseChangeLog databaseChangeLog) {
+        if (databaseChangeLog == null) {
+            this.changeLogName = null;
+        } else {
+            this.changeLogName = databaseChangeLog.getFilePath();
+        }
+    }
+
+    @Override
+    public void setChangeSet(ChangeSet changeSet) {
+        if (changeSet == null) {
+            this.changeSetName = null;
+        } else {
+            this.changeSetName = changeSet.toString(false);
+        }
     }
 
     public void setName(String name) {
@@ -38,10 +66,6 @@ public class JavaUtilLogger extends AbstractLogger {
     }
 
 
-    /**
-     * @param logLevel
-     * @param logFile
-     */
     public void setLogLevel(String logLevel, String logFile) {
         Handler fH;
 
@@ -110,4 +134,22 @@ public class JavaUtilLogger extends AbstractLogger {
     public void setUseParentHandlers(boolean b) {
         logger.setUseParentHandlers(b);
     }
+
+    protected String formatMessage(String message) {
+        if (StringUtils.trimToNull(message) == null) {
+            return null;
+        }
+
+        String outMessage = "";
+        if (changeLogName != null) {
+            outMessage += changeLogName+"::";
+        }
+        if (changeSetName != null) {
+            outMessage += changeSetName.replace(changeLogName+"::", "")+"::";
+        }
+        outMessage += message;
+
+        return message;
+    }
+
 }
