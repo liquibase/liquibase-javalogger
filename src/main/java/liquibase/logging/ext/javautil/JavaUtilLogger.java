@@ -5,6 +5,7 @@ import liquibase.changelog.DatabaseChangeLog;
 import liquibase.exception.UnexpectedLiquibaseException;
 import liquibase.logging.core.AbstractLogger;
 import liquibase.logging.LogLevel;
+import liquibase.logging.LogType;
 import liquibase.util.StringUtils;
 
 import java.io.IOException;
@@ -21,11 +22,6 @@ public class JavaUtilLogger extends AbstractLogger {
     private String changeLogName = null;
     private String changeSetName = null;
 
-    public int getPriority() {
-        return PRIORITY_DATABASE;
-    }
-
-    @Override
     public void setChangeLog(DatabaseChangeLog databaseChangeLog) {
         if (databaseChangeLog == null) {
             this.changeLogName = null;
@@ -34,7 +30,6 @@ public class JavaUtilLogger extends AbstractLogger {
         }
     }
 
-    @Override
     public void setChangeSet(ChangeSet changeSet) {
         if (changeSet == null) {
             this.changeSetName = null;
@@ -47,10 +42,9 @@ public class JavaUtilLogger extends AbstractLogger {
         logger = java.util.logging.Logger.getLogger(name);
     }
 
-    @Override
     public void setLogLevel(LogLevel logLevel) {
         if (logLevel == LogLevel.DEBUG) {
-            logger.setLevel(Level.FINEST);
+            logger.setLevel(Level.ALL);
         } else if (logLevel == LogLevel.INFO) {
             logger.setLevel(Level.INFO);
         } else if (logLevel == LogLevel.WARNING) {
@@ -62,7 +56,6 @@ public class JavaUtilLogger extends AbstractLogger {
         } else {
             throw new UnexpectedLiquibaseException("Unknown log level: " + logLevel);
         }
-        super.setLogLevel(logLevel);
     }
 
 
@@ -86,7 +79,14 @@ public class JavaUtilLogger extends AbstractLogger {
 
     }
 
-    public void severe(String message) {
+    private void setLogLevel(String logLevel) {
+
+    	logger.setUseParentHandlers(false);
+        setLogLevel(logLevel);
+
+	}
+
+	public void severe(String message) {
         logger.severe(message);
     }
 
@@ -151,5 +151,53 @@ public class JavaUtilLogger extends AbstractLogger {
 
         return message;
     }
+
+	@Override
+	public void severe(LogType target, String message) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void severe(LogType target, String message, Throwable e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void warning(LogType target, String message) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void warning(LogType target, String message, Throwable e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void info(LogType logType, String message) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void info(LogType target, String message, Throwable e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void debug(LogType target, String message) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void debug(LogType target, String message, Throwable e) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
