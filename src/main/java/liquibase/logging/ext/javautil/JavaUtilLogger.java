@@ -86,36 +86,36 @@ public class JavaUtilLogger extends AbstractLogger {
 
 	}
 
-	public void severe(String message) {
+	public void severe(LogType target, String message) {
         logger.severe(message);
     }
 
-    public void severe(String message, Throwable e) {
+    public void severe(LogType target, String message, Throwable e) {
         logger.log(Level.SEVERE, message, e);
     }
 
-    public void warning(String message) {
+    public void warning(LogType target, String message) {
         logger.warning(message);
     }
 
-    public void warning(String message, Throwable e) {
+    public void warning(LogType target, String message, Throwable e) {
         logger.log(Level.WARNING, message, e);
     }
 
-    public void info(String message) {
+    public void info(LogType target, String message) {
         logger.info(message);
     }
 
-    public void info(String message, Throwable e) {
+    public void info(LogType target, String message, Throwable e) {
         logger.log(Level.INFO, message, e);
     }
 
-    public void debug(String message) {
+    public void debug(LogType target, String message) {
         logger.finest(message);
 
     }
 
-    public void debug(String message, Throwable e) {
+    public void debug(LogType target, String message, Throwable e) {
         logger.log(Level.FINEST, message, e);
     }
 
@@ -151,53 +151,4 @@ public class JavaUtilLogger extends AbstractLogger {
 
         return message;
     }
-
-	@Override
-	public void severe(LogType target, String message) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void severe(LogType target, String message, Throwable e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void warning(LogType target, String message) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void warning(LogType target, String message, Throwable e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void info(LogType logType, String message) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void info(LogType target, String message, Throwable e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void debug(LogType target, String message) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void debug(LogType target, String message, Throwable e) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
