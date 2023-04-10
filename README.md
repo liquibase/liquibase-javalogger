@@ -1,6 +1,10 @@
 Liquibase java.util.Logger Extension
 ========================
 
+# DEPRECATED
+
+Liquibase now uses java.util.Logger by default, so this extension is no longer needed
+
 
 This extension changes the Liquibase logging system to use the java.util.Logger rather than STDOUT.
 
